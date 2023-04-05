@@ -14,6 +14,7 @@ Our payload is going to be <em><b><script> alert("Attention ... Cyberus") </scri
 <h2>A3 Cross-Site-Scripting Reflected (HREF)</h2>
 In this section the website is asking us to enter the name in order to vote for a certain movie. We are going to enter a name then press go to see what is going to happen.<br>
 Amazing! our name reflected in the page. that means we can do as we did in the previous task.<br>
+<img src="Screenshot 2023-04-05 054447.png">
 Now, let's enter the usual payload <em><b><script> alert("Attention ... Cyberus") </script></b></em> and see what happens. Oops, It does NOT do anything. but there is something weird, The payload is passed instead of <b>vote</b> word.<br>
 Now let's open the source code of the page to see how it works.<br>
 We can see that the first bracket < is considered as the closing bracket for <b> a tag </b>.<br>
