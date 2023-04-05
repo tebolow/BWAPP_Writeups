@@ -16,6 +16,7 @@ In this section the website is asking us to enter the name in order to vote for 
 Amazing! our name reflected in the page. that means we can do as we did in the previous task.<br>
 <img src="Screenshot 2023-04-05 054447.png">
 Now, let's enter the usual payload <em><b><script> alert("Attention ... Cyberus") </script></b></em> and see what happens. Oops, It does NOT do anything. but there is something weird, The payload is passed instead of <b>vote</b> word.<br>
+<img src="Screenshot 2023-04-05 054623.png">
 Now let's open the source code of the page to see how it works.<br>
 We can see that the first bracket < is considered as the closing bracket for <b> a tag </b>.<br>
 So we can modify our payload to be <em><b>><script> alert("Attention ... Cyberus") </script></b></em> instead of <em><b><script> alert("Attention ... Cyberus") </script></b></em>
