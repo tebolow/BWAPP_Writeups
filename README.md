@@ -6,7 +6,7 @@
 <h2>A3 Cross-Site-Scripting Reflected (Post)</h2>
 In this section we are going to try to exploit the vulnerability of XSS Post.<br>
 <b>First step:</b> we are going to try the fields. We find that the website writes <em>welcome + "what we entered in the two fields"</em>.<br>
-
+![Name displayed](/assets/img/MarineGEO_logo.png "Name Displayed")
 Now we are going to try to deploy a payload that shows an alert of "Attention ... Cyberus". after placing our payload we find that it does NOT work as we left the second field empty.<br>
 Our payload is going to be <em><b><script> alert("Attention ... Cyberus") </script></b></em>, and we will put a white space in the second field. Now, It's working.
 
