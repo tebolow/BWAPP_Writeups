@@ -19,6 +19,7 @@ Now, let's enter the usual payload <em><b><script> alert("Attention ... Cyberus"
 <img src="Screenshot 2023-04-05 054623.png">
 Now let's open the source code of the page to see how it works.<br>
 We can see that the first bracket < is considered as the closing bracket for <b> a tag </b>.<br>
+<img src="Screenshot 2023-04-05 054719.png">
 So we can modify our payload to be <em><b>><script> alert("Attention ... Cyberus") </script></b></em> instead of <em><b><script> alert("Attention ... Cyberus") </script></b></em>
-
+<img src="Screenshot 2023-04-05 054831.png">
 <h2>A3 Cross-Site-Scripting Reflected (Post)</h2>
