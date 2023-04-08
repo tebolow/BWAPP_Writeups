@@ -25,32 +25,43 @@ So we can modify our payload to be <em><b>><script> alert("Attention ... Cyberus
 
 <h2>A3 Cross-Site-Scripting Stored (SQLiteManager)</h2>
 At first, When we open the page it's going to display 3 links. Let's try to open the first one.<br>
+<img src="Screenshot 2023-04-08 020237.png">
 Now we are going to try to put our payload in the first input field. Oops it appears that every field must be filled.<br>
+<img src="Screenshot 2023-04-08 020503.png">
 After filling all fields our payload and a white space, let's try agian.<br>
 Well done it worked. Now this alert will show up every time we visit this link.
+<img src="Screenshot 2023-04-08 020531.png">
 
 <h2>A3 SQL Injection (POST/Select)</h2>
-In this challenge when you open you will find a combo-box to choose the movie you want, then after pressing go the website will display all its data.<br>
+In this challenge when you open you will find a combo-box to choose the movie you want, then after pressing "go" the website will display all the movie's data.<br>
+<img src="Screenshot 2023-04-08 040313.png">
 There are no passed parameters in the URL and no input fields. So, we are going to use burp suit to analyse the request being sent.<br>
-We find that the website selects the movie depending on a number. let's try to mess it up by addin <b> ' </b>.<br>
+<img src="Screenshot 2023-04-08 040340.png">
+We find that the website selects the movie depending on a number. let's try to mess it up by adding <b> ' </b>.<br>
 It now shows us the syntax error of the database and that's how we know that the website is vulnerable to SQL injection.<br>
+<img src="Screenshot 2023-04-08 040405.png">
 Now you can try multiple payloads.
 
 <h2>A3 SQL Injection (Captcha)</h2>
-When openning this challenge we are going to find an input field to fill a captcha. let's try to test it.<br>
-It doesn't fill any URL parameters or reflect what we typed, So, let's fill it correctly and see what happens.<br>
-It will open a second page in which we can search for movies. I can notice that whatever we type is affecting the URL title parameter.<br>
+When openning this challenge we are going to find an input field to fill a captcha. let's try to test it. It doesn't fill any URL parameters or reflect what we typed.<br>
+<img src="Screenshot 2023-04-08 043933.png">
+So, let's fill it correctly and see what happens.<br>
+It will open a second page in which we can search for movies. I can notice that whatever we type is affecting the URL "title" parameter.<br>
+<img src="Screenshot 2023-04-08 044349.png">
 Let's try to add <b> ' </b> in a try to corrupt the database. Guess what? it worked and the syntax error has shown up. <br>
+<img src="Screenshot 2023-04-08 044420.png">
 Now you can try different payloads. The one I tried was <b><em> test ' union select 1,2,3,4,5,6,7 from users # </em></b>
 
 <h2>A3 SQL Injection (SQLite)</h2>
 OK, let's try to test that "search for a movie" input field. It does nothing. but as usual the title URL parameter is changing.<br>
 Now try to add <b> ' </b>. It returns an error HY000. and if we search for it we get.
+<img src="Screenshot 2023-04-08 050938.png">
 Which refers to a missing of semicolon right here.<br>
 That means that it's vulnerable to SQLi. so let's try to use our payload <b> test ' union select null, name, null, null, null, null from sqlite_master where type='table';</b> this payload is expected to get you the names of the tables stored. And now you can do your own payloads.
+<img src="Screenshot 2023-04-08 052158.png">
 
 
 <h2>A3 SQL Injection Stored Blind Time-based</h2>
-In this section there is a single input field that does NOT reflect anything. But, the URL parameter (title is taking whatever we type).<br>
-So, If let's try to test it. We are going to type in "test '" in order to corrupt the query and see what happens. Nothing? dissapointing.<br>
-Ok, Now, let's try something a little diiferent. let's try the sleep query to check if it was vulnerable to SQLi or not. let's try this payload <b> test ' or 1=1 and sleep(1) </b> we can find that the page too much more time to take an action which means that our payload was executed successfully. 
+In this section there is a single input field that does NOT reflect anything. But, the URL parameter (title) is taking whatever we type.<br>
+So, let's try to test it. We are going to type in "test <b>'</b>" in order to corrupt the query and see what happens. Nothing? dissapointing. But don't worry<br>
+Ok, Now, let's try something a little diiferent. let's try <b>sleep()</b> to check if it was vulnerable to SQLi or not. let's try this payload <b> test ' or 1=1 and sleep(1) </b> we can find that the page took too much time to take an action than usual which means that our payload was executed successfully. 
